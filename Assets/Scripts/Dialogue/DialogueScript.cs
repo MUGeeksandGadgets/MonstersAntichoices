@@ -10,20 +10,27 @@ public class DialogueScript : MonoBehaviour {
 	private bool isShowing;
 	private ConversationNode conversation;
 	private ConversationNode convToStart;
+	private bool scheduledToClose;
 
 	// Use this for initialization
 	void Start () {
+		scheduledToClose = false;
 		HideUI ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (isShowing) {
-			if (Input.GetKeyDown (KeyCode.Space)) {
-				if (this.conversation.next != null) {
-					UpdateConversation (this.conversation.next);
-				} else {
-					HideUI ();
+			if (scheduledToClose) {
+				HideUI ();
+				scheduledToClose = false;
+			} else {
+				if (Input.GetKeyDown (KeyCode.Space)) {
+					if (this.conversation.next != null) {
+						UpdateConversation (this.conversation.next);
+					} else {
+						scheduledToClose = true;
+					}
 				}
 			}
 		} else {
