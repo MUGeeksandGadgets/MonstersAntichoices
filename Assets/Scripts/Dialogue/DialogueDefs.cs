@@ -9,7 +9,6 @@ public class DialogueDefs {
 		//   Pan Camera
 		//   Change sprite animation
 		//   Start move
-		//   Delay
 		//   Change scene (with transition)
 
 
@@ -17,9 +16,13 @@ public class DialogueDefs {
 			return new MessageChain ()
 				.freeze_player ()
 				.msg ("Oh, my nephew has arrived.")
-				.sound ("intro")
-				.wait_seconds (8.0f)
-				.msg ("Finally!")
+				.moveNPC("NPC", "WEST", 4)
+				.wait_seconds(NPC_Behavior.TIME_TO_MOVE_ONCE * 4)
+				.wait_seconds(0.3f)
+				.moveNPC("NPC", "EAST", 4)
+				.wait_seconds(NPC_Behavior.TIME_TO_MOVE_ONCE * 4)
+				.wait_seconds(1.0f)
+				.msg ("But where's my other nephew?")
 				.unfreeze_player ();
 			
 		}

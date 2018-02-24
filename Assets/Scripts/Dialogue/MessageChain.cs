@@ -14,6 +14,20 @@ public class MessageChain {
 		return this;
 	}
 
+	public MessageChain turnNPC(string npcName, string direction) {
+		list.Add (new Message ((dlg) => {
+			GameObject.Find(npcName).GetComponent<NPC_Behavior>().SetDirection(direction);
+		}, true));
+		return this;
+	}
+
+	public MessageChain moveNPC(string npcName, string direction, int numSpaces) {
+		list.Add (new Message ((dlg) => {
+			GameObject.Find (npcName).GetComponent<NPC_Behavior> ().Move (direction, numSpaces);
+		}, true));
+		return this;
+	}
+
 	public MessageChain choice(string text, string nextConversationName) {
 		list[list.Count - 1].AddChoice(text, nextConversationName);
 		return this;
