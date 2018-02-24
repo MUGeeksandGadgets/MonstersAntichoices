@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Message {
-	public delegate void ChoiceCallback();
+	public delegate void ChoiceCallback(DialogueScript dlg);
 
 	public string text;
 	public List<KeyValuePair<string, ChoiceCallback>> choices;

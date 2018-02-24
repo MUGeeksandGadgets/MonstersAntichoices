@@ -10,11 +10,13 @@ public class DialogueDefs {
 			    .msg ("Hi?")
 			    .msg ("Who's there?")
 			    .msg ("IT'S PIKACHU")
-				.choice ("Take it?", () => {
+				.choice ("Take it?", (dlg) => {
 					Debug.Log ("Took it");
+					dlg.StartConversation(new MessageChain().msg("Well... you took it."));
 				})
-				.choice ("Leave it.", () => {
+				.choice ("Leave it.", (dlg) => {
 					Debug.Log ("Left it");
+					dlg.StartConversation(new MessageChain().msg("You left it."));
 				});
 
 		return null;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueScript : MonoBehaviour {
 	public GameObject myPanel;
 	public GameObject choicePanel;
+	public Text choiceText;
 	public Text myText;
 
 	private bool isShowing;
@@ -53,16 +54,19 @@ public class DialogueScript : MonoBehaviour {
 
 	private void ShowUI() {
 		isShowing = true;
-		if (conversation.Get (currentMessage).choices.Count > 0)
+		if (conversation.Get (currentMessage).choices.Count > 0) {
 			choicePanel.SetActive (true);
+			choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (conversation.Get (currentMessage).choices);
+		}
 		myPanel.SetActive (true);
 	}
 
-	private void HideUI() {
+	public void HideUI() {
 		isShowing = false;
 		choicePanel.SetActive (false);
 		myPanel.SetActive (false);
 		myText.text = "";
+		choiceText.text = "";
 	}
 
 	public void StartConversation(MessageChain conversation) {
@@ -72,8 +76,10 @@ public class DialogueScript : MonoBehaviour {
 	void UpdateConversation(Message node) {
 		myText.text = node.text;
 		if (isShowing) {
-			if (conversation.Get (currentMessage).choices.Count > 0)
+			if (node.choices.Count > 0) {
 				choicePanel.SetActive (true);
+				choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (node.choices);
+			}
 		}
 	}
 }
