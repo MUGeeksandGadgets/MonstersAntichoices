@@ -65,9 +65,7 @@ public class DialogueScript : MonoBehaviour {
 		convToStart = conversation;
 	}
 
-	void UpdateConversation(ConversationNode node) {
-		if (node.type == ConversationNode.Type.MESSAGE) {
-			myText.text = ((Message)node).text;
-		}
+	void UpdateConversation(Message node) {
+		myText.text = node.text;
 	}
 }
