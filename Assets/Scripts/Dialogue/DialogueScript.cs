@@ -8,8 +8,9 @@ public class DialogueScript : MonoBehaviour {
 	public Text myText;
 
 	private bool isShowing;
-	private ConversationNode conversation;
-	private ConversationNode convToStart;
+	private MessageChain conversation;
+	private int currentMessage;
+	private MessageChain convToStart;
 	private bool scheduledToClose;
 
 	// Use this for initialization
@@ -26,8 +27,9 @@ public class DialogueScript : MonoBehaviour {
 				scheduledToClose = false;
 			} else {
 				if (Input.GetKeyDown (KeyCode.Space)) {
-					if (this.conversation.next != null) {
-						UpdateConversation (this.conversation.next);
+					if (this.conversation.Get(currentMessage + 1) != null) {
+						UpdateConversation (this.conversation.Get(currentMessage + 1));
+						currentMessage += 1;
 					} else {
 						scheduledToClose = true;
 					}
@@ -35,7 +37,9 @@ public class DialogueScript : MonoBehaviour {
 			}
 		} else {
 			if (convToStart != null) {
-				UpdateConversation (convToStart);
+				this.conversation = convToStart;
+				currentMessage = 0;
+				UpdateConversation (this.conversation.Get(0));
 				ShowUI ();
 				convToStart = null;
 			}
@@ -57,14 +61,13 @@ public class DialogueScript : MonoBehaviour {
 		myText.text = "";
 	}
 
-	public void StartConversation(ConversationNode conversation) {
+	public void StartConversation(MessageChain conversation) {
 		convToStart = conversation;
 	}
 
-	void UpdateConversation(ConversationNode conversation) {
-		this.conversation = conversation;
-		if (conversation.type == ConversationNode.Type.MESSAGE) {
-			myText.text = ((Message)conversation).text;
+	void UpdateConversation(ConversationNode node) {
+		if (node.type == ConversationNode.Type.MESSAGE) {
+			myText.text = ((Message)node).text;
 		}
 	}
 }

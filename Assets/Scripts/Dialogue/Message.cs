@@ -5,7 +5,7 @@ using UnityEngine;
 public class Message : ConversationNode {
 	public string text;
 
-	public Message(string text, ConversationNode parent = null) : base(ConversationNode.Type.MESSAGE, parent) {
+	public Message(string text) : base(ConversationNode.Type.MESSAGE) {
 		this.text = text;
 	}
 }
