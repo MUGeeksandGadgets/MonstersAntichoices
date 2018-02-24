@@ -41,6 +41,13 @@ public class MessageChain {
 		return this;
 	}
 
+	public MessageChain sound(string name) {
+		list.Add (new Message ((dlg) => {
+			GameObject.Find("Cutscene Controller").GetComponent<CutsceneControllerScript>().PlaySound(name);
+		}, true));
+		return this;
+	}
+
 	public Message Get(int index) {
 		if (index < 0 || index >= list.Count)
 			return null;

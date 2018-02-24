@@ -4,6 +4,16 @@ using System.Collections.Generic;
 
 public class CutsceneControllerScript : MonoBehaviour
 {
+	public AudioSource audioSource;
+
+	[System.Serializable]
+	public class AudioClipEntry {
+		public string name;
+		public AudioClip clip;
+	}
+
+	public AudioClipEntry[] audioClipEntries;
+
 	private class Timer {
 		public DialogueScript dlg;
 		public float startSeconds;
@@ -43,6 +53,14 @@ public class CutsceneControllerScript : MonoBehaviour
 
 	public void Delay(DialogueScript dlg, float seconds, SavedDialogueState dlgState) {
 		timers.Add (new Timer (dlg, Time.time, seconds, dlgState));
+	}
+
+	public void PlaySound(string name) {
+		foreach (AudioClipEntry entry in audioClipEntries) {
+			if (entry.name.Equals (name)) {
+				audioSource.PlayOneShot (entry.clip);
+			}
+		}
 	}
 }
 

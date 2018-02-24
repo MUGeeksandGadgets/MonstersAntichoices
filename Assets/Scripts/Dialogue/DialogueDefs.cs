@@ -17,7 +17,8 @@ public class DialogueDefs {
 			return new MessageChain ()
 				.freeze_player ()
 				.msg ("Oh, my nephew has arrived.")
-				.wait_seconds (2.0f)
+				.sound ("intro")
+				.wait_seconds (8.0f)
 				.msg ("Finally!")
 				.unfreeze_player ();
 			
