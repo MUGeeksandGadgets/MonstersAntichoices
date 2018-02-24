@@ -70,6 +70,7 @@ public class DialogueScript : MonoBehaviour {
 	private void ShowUI() {
 		isShowing = true;
 		if (conversation.Get(currentMessage).choices.Count > 0) {
+			choicePanel.GetComponent<ChoicePanelScript> ().cursor.text = ">";
 			choicePanel.SetActive (true);
 			choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (conversation.Get (currentMessage).choices);
 		}
@@ -78,6 +79,7 @@ public class DialogueScript : MonoBehaviour {
 
 	public void HideUI() {
 		isShowing = false;
+		choicePanel.GetComponent<ChoicePanelScript> ().cursor.text = "";
 		choicePanel.SetActive (false);
 		myPanel.SetActive (false);
 		myText.text = "";
@@ -92,6 +94,7 @@ public class DialogueScript : MonoBehaviour {
 		myText.text = node.text;
 		if (isShowing) {
 			if (node.choices.Count > 0) {
+				choicePanel.GetComponent<ChoicePanelScript> ().cursor.text = ">";
 				choicePanel.SetActive (true);
 				choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (node.choices);
 			}
