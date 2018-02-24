@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MessageChain {
-	private List<ConversationNode> list;
+	private List<Message> list;
 
 	public MessageChain() {
-		list = new List<ConversationNode> ();
+		list = new List<Message> ();
 	}
 
 	public MessageChain msg(string text) {
@@ -14,7 +14,12 @@ public class MessageChain {
 		return this;
 	}
 
-	public ConversationNode Get(int index) {
+	public MessageChain choice(string text, Message.ChoiceCallback callback) {
+		list[list.Count - 1].AddChoice(text, callback);
+		return this;
+	}
+
+	public Message Get(int index) {
 		if (index < 0 || index >= list.Count)
 			return null;
 		
