@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
 	Vector3 lastPos;
 	float t;
 	bool noBlock = false;
+	bool frozen = false;
 
 	public float walkSpeed = 3f;
 	float dist = 0.5f;
@@ -25,7 +26,7 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		bool interact = false;
-		if (Input.GetButtonDown("Fire1")) {
+		if (!frozen && Input.GetButtonDown("Fire1")) {
 			switch (currentDir) {
 				 case Direction.North:
 					offset.y = 0.70f;
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour {
 					break;
 			}
 		}
-		if (!isMoving) {
+		if (!isMoving && !frozen) {
 			offset.x = 0;
 			offset.y = 0;
 			input = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
@@ -193,7 +194,13 @@ public class Player : MonoBehaviour {
 		yield return 0;
 	}
 
+	public void Freeze() {
+		frozen = true;
+	}
 
+	public void Unfreeze() {
+		frozen = false;
+	}
 }
 
 enum Direction{
