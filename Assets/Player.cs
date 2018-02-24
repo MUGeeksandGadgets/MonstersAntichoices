@@ -13,16 +13,19 @@ public class Player : MonoBehaviour {
 	bool noBlock = false;
 
 	public float walkSpeed = 3f;
-	float dist = 0.1f;
+	float dist = 0.5f;
 	public Sprite northSprite;
 	public Sprite eastSprite;
 	public Sprite southSprite;
 	public Sprite westSprite;
 
+	Vector3 offset;
 
 	// Update is called once per frame
 	void Update () {
 		if (!isMoving) {
+			offset.x = 0;
+			offset.y = 0;
 			input = new Vector2 (Input.GetAxis ("Horizontal"), Input.GetAxis ("Vertical"));
 			if (Mathf.Abs (input.x) > Mathf.Abs(input.y)) {
 				input.y = 0;
@@ -43,48 +46,66 @@ public class Player : MonoBehaviour {
 				if (input.y < 0) {
 					currentDir = Direction.South;
 				}
-				RaycastHit2D hit = Physics2D.Raycast (transform.position, -Vector2.up);
+				RaycastHit2D hit;//	 = Physics2D.Raycast (transform.position, -Vector2.up);
 				switch (currentDir) {
-				case Direction.North:
-					gameObject.GetComponent<SpriteRenderer> ().sprite = northSprite;
-					hit = Physics2D.Raycast (transform.position, Vector2.up, dist);
-					if (hit.collider != null) {
-						noBlock = true;
-					} else {
-						noBlock = false;
-					}
-					break;
-				case Direction.East:
-					gameObject.GetComponent<SpriteRenderer> ().sprite = eastSprite;
-					hit = Physics2D.Raycast (transform.position, Vector2.right, dist);
-					if (hit.collider.tag == "Wall") {
-						noBlock = true;
-					} else {
-						if (hit.distance <= dist) {
-							noBlock = false;
-							print ("Hit wall");
+					case Direction.North:
+						offset.y = 0.70f;
+						gameObject.GetComponent<SpriteRenderer> ().sprite = northSprite;
+						hit = Physics2D.Raycast (transform.position + offset, Vector2.up, dist);
+						if (hit.collider == null) {
+							noBlock = true;
 						}
-					}
-					break;
-				case Direction.South:
-					gameObject.GetComponent<SpriteRenderer> ().sprite = southSprite;
-					hit = Physics2D.Raycast (transform.position, Vector2.down, dist);
-					if (hit.collider != null) {
-						noBlock = true;
-					} else {
-						noBlock = false;
-					}
-					break;
-				case Direction.West:
-					gameObject.GetComponent<SpriteRenderer> ().sprite = westSprite;
-					hit = Physics2D.Raycast (transform.position, Vector2.left, dist);
-					if (hit.collider != null) {
-						noBlock = true;
-					} else {
-						noBlock = false;
-					}
-					break;
+						else if (hit.collider.tag == "Wall") {
+							noBlock = false;
+							print ("Hit Wall");
+						} else {
+							noBlock = true;
+						}
+						break;
+					case Direction.East:
+						offset.x = 0.65f;
+						gameObject.GetComponent<SpriteRenderer> ().sprite = eastSprite;
+						hit = Physics2D.Raycast (transform.position + offset, Vector2.right, dist);
+						if (hit.collider == null) {
+							noBlock = true;
+						}
+						else if (hit.collider.tag == "Wall") {
+							noBlock = false;
+							print ("Hit Wall");
+						} else {
+							noBlock = true;
+						}
+						break;
+					case Direction.South:
+						offset.y = 0.7f;
+						gameObject.GetComponent<SpriteRenderer> ().sprite = southSprite;
+						hit = Physics2D.Raycast (transform.position - offset, Vector2.down, dist);
+						if (hit.collider == null) {
+							noBlock = true;
+						}
+						else if (hit.collider.tag == "Wall") {
+							noBlock = false;
+							print ("Hit Wall");
+						} else {
+							noBlock = true;
+						}
+						break;
+					case Direction.West:
+						offset.x = 0.65f;
+						gameObject.GetComponent<SpriteRenderer> ().sprite = westSprite;
+						hit = Physics2D.Raycast (transform.position - offset, Vector2.left, dist);
+						if (hit.collider == null) {
+							noBlock = true;
+						}
+						else if (hit.collider.tag == "Wall") {
+							noBlock = false;
+							print ("Hit Wall");
+						} else {
+							noBlock = true;
+						}
+						break;
 				}
+
 				if (noBlock == true) {
 					StartCoroutine (Move (transform));
 				}
