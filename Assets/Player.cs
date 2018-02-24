@@ -20,12 +20,16 @@ public class Player : MonoBehaviour {
 	public Sprite southSprite;
 	public Sprite westSprite;
 
+	//Moving
+	public Sprite westMoveSpr;
+	public Sprite eastMoveSpr;
+
 	Vector3 offset;
-	bool interact = false;
+	//bool interact = false;
 	RaycastHit2D hit;	
 	// Update is called once per frame
 	void Update () {
-		bool interact = false;
+		//bool interact = false;
 		if (!frozen && Input.GetButtonDown("Fire1")) {
 			switch (currentDir) {
 				 case Direction.North:
@@ -36,7 +40,7 @@ public class Player : MonoBehaviour {
 					}
 					else if (hit.collider.tag == "NPC") {
 						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
-						interact = true;
+						//interact = true;
 					}
 					break;
 				case Direction.East:
@@ -46,7 +50,7 @@ public class Player : MonoBehaviour {
 						
 					}
 					else if (hit.collider.tag == "NPC") {
-						interact = true;
+						//interact = true;
 						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
 					}
 					break;
@@ -58,7 +62,7 @@ public class Player : MonoBehaviour {
 						
 					}
 					else if (hit.collider.tag == "NPC") {
-						interact = false;
+						//interact = false;
 						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
 					} else {
 						
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour {
 						
 					}
 					else if (hit.collider.tag == "NPC") {
-						interact = false;
+						//interact = false;
 						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
 					} else {
 						noBlock = true;
@@ -182,14 +186,38 @@ public class Player : MonoBehaviour {
 		t = 0;//Math.sign simply flattens the number to either 1 or -1
 		endPos = new Vector3 (startPos.x + System.Math.Sign(input.x), startPos.y + System.Math.Sign (input.y), startPos.z);
 		lastPos = entity.position;
-		
+		switch (currentDir) {
+		case Direction.North:
+			break;
+		case Direction.East:
+			gameObject.GetComponent<SpriteRenderer> ().sprite = eastMoveSpr;
+			break;
+		case Direction.South:
+			break;
+		case Direction.West: 
+			gameObject.GetComponent<SpriteRenderer> ().sprite = westMoveSpr;
+			break;
+		}
 		while (t < 1f) {
 			//Gives the amount of time that it takes to move from block to block
+
 			t += Time.deltaTime * walkSpeed;
 			entity.position = Vector3.Lerp(startPos, endPos, t);
 			yield return null;
 		}
 
+		switch (currentDir) {
+		case Direction.North:
+			break;
+		case Direction.East:
+			gameObject.GetComponent<SpriteRenderer> ().sprite = eastSprite;
+			break;
+		case Direction.South:
+			break;
+		case Direction.West: 
+			gameObject.GetComponent<SpriteRenderer> ().sprite = westSprite;
+			break;
+		}
 		isMoving = false;
 		yield return 0;
 	}
