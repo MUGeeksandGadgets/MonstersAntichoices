@@ -78,12 +78,14 @@ public class DialogueScript : MonoBehaviour {
 
 	private void ShowUI() {
 		isShowing = true;
-		if (conversation.Get(currentMessage).choices.Count > 0) {
-			choicePanel.GetComponent<ChoicePanelScript> ().cursor.text = ">";
-			choicePanel.SetActive (true);
-			choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (conversation.Get (currentMessage).choices);
+		if (!conversation.Get (currentMessage).is_just_code) {
+			if (conversation.Get (currentMessage).choices.Count > 0) {
+				choicePanel.GetComponent<ChoicePanelScript> ().cursor.text = ">";
+				choicePanel.SetActive (true);
+				choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (conversation.Get (currentMessage).choices);
+			}
+			myPanel.SetActive (true);
 		}
-		myPanel.SetActive (true);
 	}
 
 	public void HideUI() {

@@ -36,10 +36,11 @@ public class NPC_Behavior : MonoBehaviour
 			float now = Time.time;
 
 			if (now >= moveBeginTime + TIME_TO_MOVE_ONCE * moveSpaces) {
-				transform.localPosition = moveToPos;
+				transform.localPosition = new Vector3(moveToPos.x, moveToPos.y, transform.localPosition.z);
 				moveSpaces = 0;
 			} else {
-				transform.localPosition = Vector2.Lerp (moveFromPos, moveToPos, (now - moveBeginTime) / ((float)moveSpaces * TIME_TO_MOVE_ONCE));
+				var pos = Vector2.Lerp (moveFromPos, moveToPos, (now - moveBeginTime) / ((float)moveSpaces * TIME_TO_MOVE_ONCE));
+				transform.localPosition = new Vector3 (pos.x, pos.y, transform.localPosition.z);
 			}
 		}
 	}
@@ -102,10 +103,12 @@ public class NPC_Behavior : MonoBehaviour
 		SetDirection (direction);
 
 		moveFromPos = new Vector2 (transform.localPosition.x, transform.localPosition.y);
+		Debug.Log (moveFromPos);
 
 		var offset = GetOffsetForDirection (direction);
 		moveToPos = new Vector2 (moveFromPos.x + offset.x * numSpaces, moveFromPos.y + offset.y * numSpaces);
 
+		Debug.Log (moveToPos);
 		moveDirection = direction;
 		moveSpaces = numSpaces;
 		moveBeginTime = Time.time;

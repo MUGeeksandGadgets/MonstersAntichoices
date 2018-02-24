@@ -23,6 +23,8 @@ public class Message {
 		this.is_just_code = true;
 		this.callback = callback;
 		this.continues = continues;
+		this.text = "";
+		this.choices = new List<KeyValuePair<string, string>> ();
 	}
 
 	public void AddChoice(string text, string nextConversationName) {
