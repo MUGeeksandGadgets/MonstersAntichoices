@@ -29,9 +29,15 @@ public class DialogueScript : MonoBehaviour {
 				scheduledToClose = false;
 			} else {
 				if (Input.GetKeyDown (KeyCode.Space)) {
-					if (this.conversation.Get(currentMessage + 1) != null) {
-						UpdateConversation (this.conversation.Get(currentMessage + 1));
-						currentMessage += 1;
+					currentMessage++;
+
+					while (this.conversation.Get (currentMessage) != null && this.conversation.Get (currentMessage).is_just_code) {
+						this.conversation.Get (currentMessage).callback (this);
+						currentMessage++;
+					}
+
+					if (this.conversation.Get(currentMessage) != null) {
+						UpdateConversation (this.conversation.Get(currentMessage));
 					} else {
 						scheduledToClose = true;
 					}
@@ -41,8 +47,17 @@ public class DialogueScript : MonoBehaviour {
 			if (convToStart != null) {
 				this.conversation = convToStart;
 				currentMessage = 0;
-				UpdateConversation (this.conversation.Get(0));
-				ShowUI ();
+
+				while (this.conversation.Get (currentMessage) != null && this.conversation.Get (currentMessage).is_just_code) {
+					this.conversation.Get (currentMessage).callback (this);
+					currentMessage++;
+				}
+
+				if (this.conversation.Get (currentMessage) != null) {
+					UpdateConversation (this.conversation.Get (currentMessage));
+					ShowUI ();
+				}
+
 				convToStart = null;
 			}
 		}
@@ -54,7 +69,7 @@ public class DialogueScript : MonoBehaviour {
 
 	private void ShowUI() {
 		isShowing = true;
-		if (conversation.Get (currentMessage).choices.Count > 0) {
+		if (conversation.Get(currentMessage).choices.Count > 0) {
 			choicePanel.SetActive (true);
 			choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (conversation.Get (currentMessage).choices);
 		}

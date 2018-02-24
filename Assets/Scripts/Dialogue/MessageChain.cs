@@ -19,6 +19,20 @@ public class MessageChain {
 		return this;
 	}
 
+	public MessageChain freeze_player() {
+		list.Add (new Message ((dlg) => {
+			GameObject.Find("Player").GetComponent<Player>().Freeze();;
+		}));
+		return this;
+	}
+
+	public MessageChain unfreeze_player() {
+		list.Add (new Message ((dlg) => {
+			GameObject.Find("Player").GetComponent<Player>().Unfreeze();;
+		}));
+		return this;
+	}
+
 	public Message Get(int index) {
 		if (index < 0 || index >= list.Count)
 			return null;

@@ -6,6 +6,7 @@ public class DialogueDefs {
 	public static MessageChain getConversation(string name) {
 		if (name.Equals ("OakHello")) {
 			return new MessageChain ()
+				.freeze_player()
 				.msg ("Oh, my nephew has arrived.")
 				.msg ("Finally!")
 				.msg ("I was wondering,\nyou know?")
@@ -13,7 +14,8 @@ public class DialogueDefs {
 				.msg ("Indeed. Do try\nto be friends,\nall right?")
 				.msg ("Well, anyway.\nLet's get to it.")
 				.msg ("You just turned 10!\nThat means you need a Nomekop!")
-				.msg ("Come over here to this table.");
+				.msg ("Come over here to this table.")
+				.unfreeze_player();
 		} else if (name.Equals ("OakTable")) {
 			return new MessageChain ()
 				.msg ("Hmmm.");
