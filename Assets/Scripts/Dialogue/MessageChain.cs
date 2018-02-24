@@ -14,8 +14,8 @@ public class MessageChain {
 		return this;
 	}
 
-	public MessageChain choice(string text, Message.ChoiceCallback callback) {
-		list[list.Count - 1].AddChoice(text, callback);
+	public MessageChain choice(string text, string nextConversationName) {
+		list[list.Count - 1].AddChoice(text, nextConversationName);
 		return this;
 	}
 

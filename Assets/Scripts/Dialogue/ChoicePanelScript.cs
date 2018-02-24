@@ -8,7 +8,7 @@ public class ChoicePanelScript : MonoBehaviour {
 	public GameObject dlgCanvas;
 	public Text cursor;
 
-	private List<KeyValuePair<string, Message.ChoiceCallback>> choices;
+	private List<KeyValuePair<string, string>> choices;
 	private int selection;
 	private DialogueScript dlgScript;
 
@@ -27,13 +27,13 @@ public class ChoicePanelScript : MonoBehaviour {
 				selection++;
 
 			cursor.transform.localPosition = new Vector3(cursor.transform.localPosition.x, text.transform.localPosition.y + (choices.Count - selection) * cursor.font.lineHeight, cursor.transform.localPosition.z);
-		} else if (Input.GetKeyDown (KeyCode.Space)) {
-			Message.ChoiceCallback callback = choices [selection].Value;
-			callback (dlgScript);
+		} else if (Input.GetButtonDown("Fire1")) {
+			string convName = choices [selection].Value;
+			dlgScript.StartConversation (convName);
 		}
 	}
 
-	public void UpdateChoices(List<KeyValuePair<string, Message.ChoiceCallback>> choices) {
+	public void UpdateChoices(List<KeyValuePair<string, string>> choices) {
 		string s = "";
 
 		for (int i = 0; i < choices.Count; i++) {

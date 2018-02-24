@@ -9,12 +9,12 @@ public class Message {
 	public ChoiceCallback callback;
 
 	public string text;
-	public List<KeyValuePair<string, ChoiceCallback>> choices;
+	public List<KeyValuePair<string, string>> choices;
 
 	public Message(string text) {
 		this.is_just_code = false;
 		this.text = text;
-		this.choices = new List<KeyValuePair<string, ChoiceCallback>> ();
+		this.choices = new List<KeyValuePair<string, string>> ();
 	}
 
 	public Message(ChoiceCallback callback) {
@@ -22,7 +22,7 @@ public class Message {
 		this.callback = callback;
 	}
 
-	public void AddChoice(string text, ChoiceCallback callback) {
-		choices.Add(new KeyValuePair<string, ChoiceCallback>(text, callback));
+	public void AddChoice(string text, string nextConversationName) {
+		choices.Add(new KeyValuePair<string, string>(text, nextConversationName));
 	}
 }

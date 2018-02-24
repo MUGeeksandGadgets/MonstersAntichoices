@@ -28,7 +28,7 @@ public class DialogueScript : MonoBehaviour {
 				HideUI ();
 				scheduledToClose = false;
 			} else {
-				if (Input.GetKeyDown (KeyCode.Space)) {
+				if (Input.GetButtonDown ("Fire1")) {
 					currentMessage++;
 
 					while (this.conversation.Get (currentMessage) != null && this.conversation.Get (currentMessage).is_just_code) {
@@ -43,23 +43,23 @@ public class DialogueScript : MonoBehaviour {
 					}
 				}
 			}
-		} else {
-			if (convToStart != null) {
-				this.conversation = convToStart;
-				currentMessage = 0;
+		}
 
-				while (this.conversation.Get (currentMessage) != null && this.conversation.Get (currentMessage).is_just_code) {
-					this.conversation.Get (currentMessage).callback (this);
-					currentMessage++;
-				}
+		if (convToStart != null) {
+			this.conversation = convToStart;
+			currentMessage = 0;
 
-				if (this.conversation.Get (currentMessage) != null) {
-					UpdateConversation (this.conversation.Get (currentMessage));
-					ShowUI ();
-				}
-
-				convToStart = null;
+			while (this.conversation.Get (currentMessage) != null && this.conversation.Get (currentMessage).is_just_code) {
+				this.conversation.Get (currentMessage).callback (this);
+				currentMessage++;
 			}
+
+			if (this.conversation.Get (currentMessage) != null) {
+				UpdateConversation (this.conversation.Get (currentMessage));
+				ShowUI ();
+			}
+
+			convToStart = null;
 		}
 	}
 
@@ -88,6 +88,10 @@ public class DialogueScript : MonoBehaviour {
 
 	public void StartConversation(MessageChain conversation) {
 		convToStart = conversation;
+	}
+
+	public void StartConversation(string name) {
+		convToStart = DialogueDefs.getConversation (name);
 	}
 
 	void UpdateConversation(Message node) {
