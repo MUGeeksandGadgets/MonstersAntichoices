@@ -21,15 +21,23 @@ public class MessageChain {
 
 	public MessageChain freeze_player() {
 		list.Add (new Message ((dlg) => {
-			GameObject.Find("Player").GetComponent<Player>().Freeze();;
-		}));
+			GameObject.Find("Player").GetComponent<Player>().Freeze();
+		}, true));
 		return this;
 	}
 
 	public MessageChain unfreeze_player() {
 		list.Add (new Message ((dlg) => {
-			GameObject.Find("Player").GetComponent<Player>().Unfreeze();;
-		}));
+			GameObject.Find("Player").GetComponent<Player>().Unfreeze();
+		}, true));
+		return this;
+	}
+
+	public MessageChain wait_seconds(float seconds) {
+		list.Add (new Message ((dlg) => {
+			dlg.HideUI();
+			GameObject.Find("Cutscene Controller").GetComponent<CutsceneControllerScript>().Delay(dlg, seconds, dlg.GetNextState());
+		}, false));
 		return this;
 	}
 

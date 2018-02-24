@@ -13,6 +13,7 @@ public class DialogueScript : MonoBehaviour {
 	private MessageChain conversation;
 	private int currentMessage;
 	private MessageChain convToStart;
+	private int convIndexToStart;
 	private bool scheduledToClose;
 
 	// Use this for initialization
@@ -33,7 +34,11 @@ public class DialogueScript : MonoBehaviour {
 
 					while (this.conversation.Get (currentMessage) != null && this.conversation.Get (currentMessage).is_just_code) {
 						this.conversation.Get (currentMessage).callback (this);
-						currentMessage++;
+						if (this.conversation.Get (currentMessage).Continues ()) {
+							currentMessage++;
+						} else {
+							break;
+						}
 					}
 
 					if (this.conversation.Get(currentMessage) != null) {
@@ -47,11 +52,15 @@ public class DialogueScript : MonoBehaviour {
 
 		if (convToStart != null) {
 			this.conversation = convToStart;
-			currentMessage = 0;
+			currentMessage = convIndexToStart;
 
 			while (this.conversation.Get (currentMessage) != null && this.conversation.Get (currentMessage).is_just_code) {
 				this.conversation.Get (currentMessage).callback (this);
-				currentMessage++;
+				if (this.conversation.Get (currentMessage).Continues ()) {
+					currentMessage++;
+				} else {
+					break;
+				}
 			}
 
 			if (this.conversation.Get (currentMessage) != null) {
@@ -88,10 +97,12 @@ public class DialogueScript : MonoBehaviour {
 
 	public void StartConversation(MessageChain conversation) {
 		convToStart = conversation;
+		convIndexToStart = 0;
 	}
 
 	public void StartConversation(string name) {
 		convToStart = DialogueDefs.getConversation (name);
+		convIndexToStart = 0;
 	}
 
 	void UpdateConversation(Message node) {
@@ -103,5 +114,14 @@ public class DialogueScript : MonoBehaviour {
 				choicePanel.GetComponent<ChoicePanelScript> ().UpdateChoices (node.choices);
 			}
 		}
+	}
+
+	public SavedDialogueState GetNextState() {
+		return new SavedDialogueState (conversation, currentMessage + 1);
+	}
+
+	public void ResumeConversation(SavedDialogueState state) {
+		convToStart = state.conversation;
+		convIndexToStart = state.index;
 	}
 }
