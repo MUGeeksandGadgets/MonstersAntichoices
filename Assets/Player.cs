@@ -20,9 +20,65 @@ public class Player : MonoBehaviour {
 	public Sprite westSprite;
 
 	Vector3 offset;
-
+	bool interact = false;
+	RaycastHit2D hit;	
 	// Update is called once per frame
 	void Update () {
+		bool interact = false;
+		if (Input.GetButtonDown("Fire1")) {
+			switch (currentDir) {
+				 case Direction.North:
+					offset.y = 0.70f;
+					hit = Physics2D.Raycast (transform.position + offset, Vector2.up, dist);
+					if (hit.collider == null) {
+						
+					}
+					else if (hit.collider.tag == "NPC") {
+						interact = true;
+						print ("Hit Wall");
+					}
+					break;
+				case Direction.East:
+					offset.x = 0.65f;
+					hit = Physics2D.Raycast (transform.position + offset, Vector2.right, dist);
+					if (hit.collider == null) {
+						
+					}
+					else if (hit.collider.tag == "NPC") {
+						interact = true;
+						print ("NPC interaction");
+					}
+					break;
+				case Direction.South:
+					offset.y = 0.7f;
+				
+					hit = Physics2D.Raycast (transform.position - offset, Vector2.down, dist);
+					if (hit.collider == null) {
+						
+					}
+					else if (hit.collider.tag == "NPC") {
+						interact = false;
+						print ("NPC Interaction");
+					} else {
+						
+					}
+					break;
+				case Direction.West:
+					offset.x = 0.65f;
+				
+					hit = Physics2D.Raycast (transform.position - offset, Vector2.left, dist);
+					if (hit.collider == null) {
+						
+					}
+					else if (hit.collider.tag == "NPC") {
+						interact = false;
+						print ("NPC Interaction");
+					} else {
+						noBlock = true;
+					}
+					break;
+			}
+		}
 		if (!isMoving) {
 			offset.x = 0;
 			offset.y = 0;
@@ -46,7 +102,7 @@ public class Player : MonoBehaviour {
 				if (input.y < 0) {
 					currentDir = Direction.South;
 				}
-				RaycastHit2D hit;//	 = Physics2D.Raycast (transform.position, -Vector2.up);
+				//	 = Physics2D.Raycast (transform.position, -Vector2.up);
 				switch (currentDir) {
 					case Direction.North:
 						offset.y = 0.70f;
@@ -55,7 +111,7 @@ public class Player : MonoBehaviour {
 						if (hit.collider == null) {
 							noBlock = true;
 						}
-						else if (hit.collider.tag == "Wall") {
+						else if (hit.collider.tag == "Wall" || hit.collider.tag == "NPC" ) {
 							noBlock = false;
 							print ("Hit Wall");
 						} else {
@@ -69,7 +125,7 @@ public class Player : MonoBehaviour {
 						if (hit.collider == null) {
 							noBlock = true;
 						}
-						else if (hit.collider.tag == "Wall") {
+						else if (hit.collider.tag == "Wall" || hit.collider.tag == "NPC" ) {
 							noBlock = false;
 							print ("Hit Wall");
 						} else {
@@ -83,7 +139,7 @@ public class Player : MonoBehaviour {
 						if (hit.collider == null) {
 							noBlock = true;
 						}
-						else if (hit.collider.tag == "Wall") {
+						else if (hit.collider.tag == "Wall" || hit.collider.tag == "NPC" ) {
 							noBlock = false;
 							print ("Hit Wall");
 						} else {
@@ -97,7 +153,7 @@ public class Player : MonoBehaviour {
 						if (hit.collider == null) {
 							noBlock = true;
 						}
-						else if (hit.collider.tag == "Wall") {
+						else if (hit.collider.tag == "Wall" || hit.collider.tag == "NPC" ) {
 							noBlock = false;
 							print ("Hit Wall");
 						} else {
