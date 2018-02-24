@@ -35,8 +35,8 @@ public class Player : MonoBehaviour {
 						
 					}
 					else if (hit.collider.tag == "NPC") {
+						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
 						interact = true;
-						print ("Hit Wall");
 					}
 					break;
 				case Direction.East:
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour {
 					}
 					else if (hit.collider.tag == "NPC") {
 						interact = true;
-						print ("NPC interaction");
+						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
 					}
 					break;
 				case Direction.South:
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour {
 					}
 					else if (hit.collider.tag == "NPC") {
 						interact = false;
-						print ("NPC Interaction");
+						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
 					} else {
 						
 					}
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
 					}
 					else if (hit.collider.tag == "NPC") {
 						interact = false;
-						print ("NPC Interaction");
+						hit.collider.gameObject.GetComponent<AttachConversation> ().Use ();
 					} else {
 						noBlock = true;
 					}
