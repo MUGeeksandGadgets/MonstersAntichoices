@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class DialogueDefs {
 	public static MessageChain getConversation(string name) {
-		if (name.Equals ("hello world"))
+		if (name.Equals ("OakHello")) {
 			return new MessageChain ()
-				.msg ("Hello world!")
-			    .msg ("Hi?")
-			    .msg ("Who's there?")
-			    .msg ("IT'S PIKACHU")
-				.choice ("Take it?", (dlg) => {
-					Debug.Log ("Took it");
-					dlg.StartConversation(new MessageChain().msg("Well... you took it."));
-				})
-				.choice ("Leave it.", (dlg) => {
-					Debug.Log ("Left it");
-					dlg.StartConversation(new MessageChain().msg("You left it."));
-				});
+				.msg ("Oh, my nephew has arrived.")
+				.msg ("Finally!")
+				.msg ("I was wondering,\nyou know?")
+				.msg ("You haven't been doing well in school.")
+				.msg ("Well, anyway.\nLet's get to it.")
+				.msg ("You just turned 10!\nThat means you need a Nomekop!")
+				.msg ("Come over here to this table.");
+		} else if (name.Equals ("OakTable")) {
+			return new MessageChain ()
+				.msg ("Hmmm.");
+		}
 
 		return null;
 	}
