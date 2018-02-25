@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: ef39c126b523f4abf918a56f262626f5
-timeCreated: 1519502013
+guid: 34262c02626874e2d8ec41fe233bc719
+timeCreated: 1519524894
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Trainer 1_0
-    21300002: Trainer 1_1
-    21300004: Trainer 1_2
-    21300006: Trainer 1_3
-    21300008: Trainer 1_4
-    21300010: Trainer 1_5
+    21300000: Trainer 2_0
+    21300002: Trainer 2_1
+    21300004: Trainer 2_2
+    21300006: Trainer 2_3
+    21300008: Trainer 2_4
+    21300010: Trainer 2_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: -1
     aniso: -1
     mipBias: -1
     wrapU: 1
@@ -96,7 +96,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Trainer 1_0
+      name: Trainer 2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -110,7 +110,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_1
+      name: Trainer 2_1
       rect:
         serializedVersion: 2
         x: 16
@@ -124,7 +124,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_2
+      name: Trainer 2_2
       rect:
         serializedVersion: 2
         x: 0
@@ -138,7 +138,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_3
+      name: Trainer 2_3
       rect:
         serializedVersion: 2
         x: 16
@@ -152,7 +152,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_4
+      name: Trainer 2_4
       rect:
         serializedVersion: 2
         x: 0
@@ -166,7 +166,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_5
+      name: Trainer 2_5
       rect:
         serializedVersion: 2
         x: 16

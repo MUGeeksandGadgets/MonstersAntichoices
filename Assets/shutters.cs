@@ -8,12 +8,15 @@ public class shutters : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ani = GetComponent<Animator> ();
+		cutscene1 = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Time.time > 3) {
-			ani.SetBool ("cutscene1", true);
+		if (Time.time > 3 && cutscene1 == false) {
+			//ani.SetBool ("cutscene1", true);
+			ani.SetTrigger ("animTrig");
+			cutscene1 = true;
 		}
 	}
 }

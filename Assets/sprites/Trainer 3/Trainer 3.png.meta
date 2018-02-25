@@ -1,15 +1,19 @@
 fileFormatVersion: 2
-guid: ef39c126b523f4abf918a56f262626f5
-timeCreated: 1519502013
+guid: b1c94edb3aab2408e88332bac5690a48
+timeCreated: 1519524904
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Trainer 1_0
-    21300002: Trainer 1_1
-    21300004: Trainer 1_2
-    21300006: Trainer 1_3
-    21300008: Trainer 1_4
-    21300010: Trainer 1_5
+    21300000: Trainer 3_0
+    21300002: Trainer 3_1
+    21300004: Trainer 3_2
+    21300006: Trainer 3_3
+    21300008: Trainer 3_4
+    21300010: Trainer 3_5
+    21300012: Trainer 3_6
+    21300014: Trainer 3_7
+    21300016: Trainer 3_8
+    21300018: Trainer 3_9
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -96,7 +100,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Trainer 1_0
+      name: Trainer 3_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Trainer 3_1
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Trainer 3_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Trainer 3_3
       rect:
         serializedVersion: 2
         x: 0
@@ -110,7 +156,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_1
+      name: Trainer 3_4
       rect:
         serializedVersion: 2
         x: 16
@@ -124,7 +170,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_2
+      name: Trainer 3_5
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Trainer 3_6
       rect:
         serializedVersion: 2
         x: 0
@@ -138,7 +198,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_3
+      name: Trainer 3_7
       rect:
         serializedVersion: 2
         x: 16
@@ -152,11 +212,11 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_4
+      name: Trainer 3_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -166,10 +226,10 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Trainer 1_5
+      name: Trainer 3_9
       rect:
         serializedVersion: 2
-        x: 16
+        x: 0
         y: 0
         width: 16
         height: 16
