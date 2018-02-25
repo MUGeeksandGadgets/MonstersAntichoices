@@ -6,8 +6,8 @@ public class Player : MonoBehaviour {
 	Direction currentDir;
 	Vector2 input;
 	bool isMoving = false;
-	Vector3 startPos;
-	Vector3 endPos;
+	public Vector3 startPos;
+	public Vector3 endPos;
 	Vector3 lastPos;
 	float t;
 	bool noBlock = false;
@@ -29,6 +29,7 @@ public class Player : MonoBehaviour {
 	RaycastHit2D hit;	
 	// Update is called once per frame
 	void Update () {
+		print (transform.position);
 		//bool interact = false;
 		if (!frozen && Input.GetButtonDown("Fire1")) {
 			switch (currentDir) {

@@ -26,7 +26,9 @@ public class DoorWay : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D coll){
 		if (coll.gameObject.tag == "Player") {
-			coll.gameObject.transform.position = doorwayTarget.gameObject.transform.position + offsetObj.gameObject.transform.localPosition;
+			//coll.gameObject.transform.position = 
+				coll.gameObject.GetComponent<Player>().startPos = doorwayTarget.gameObject.transform.position + offsetObj.gameObject.transform.localPosition;
+				coll.gameObject.GetComponent<Player>().endPos = doorwayTarget.gameObject.transform.position + offsetObj.gameObject.transform.localPosition;
 			print ("Got here");
 		}
 		print ("Called Collision");
