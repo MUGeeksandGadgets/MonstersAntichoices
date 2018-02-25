@@ -47,6 +47,20 @@ public class MessageChain {
 		return this;
 	}
 
+	public MessageChain freeze_npc(string name) {
+		list.Add (new Message ((dlg) => {
+			GameObject.Find(name).GetComponent<NPC_Behavior>().Freeze();
+		}, true));
+		return this;
+	}
+
+	public MessageChain unfreeze_npc(string name) {
+		list.Add (new Message ((dlg) => {
+			GameObject.Find(name).GetComponent<NPC_Behavior>().Unfreeze();
+		}, true));
+		return this;
+	}
+
 	public MessageChain wait_seconds(float seconds) {
 		list.Add (new Message ((dlg) => {
 			dlg.HideUI();
